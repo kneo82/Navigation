@@ -12,6 +12,6 @@
 
 -(void)drawWithBasePoint:(CGPoint)basePoint
                 andAngle:(CGFloat)angle
-                 andFont:(UIFont*)font;
+                 andFont:(UIFont *)font;
 
 @end

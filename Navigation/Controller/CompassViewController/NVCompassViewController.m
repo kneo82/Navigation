@@ -119,11 +119,10 @@ IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
     CGPoint pointOfCentre = CGRectGetCenter(rect);
     CGFloat outRadius = rect.size.width / 2;
     
-    self.gestureRecognizer = [[[NVRotationGestureRecognizer alloc]
-                               initWithPointOfCentre:pointOfCentre
-                               innerRadius:outRadius/5
-                               outerRadius:outRadius]
-                              autorelease];
+    self.gestureRecognizer = [[[NVRotationGestureRecognizer alloc] initWithPointOfCentre:pointOfCentre
+                                                                             innerRadius:outRadius/5
+                                                                             outerRadius:outRadius]
+                                                                                autorelease];
     
     [self.gestureRecognizer addTarget:self action:@selector(handleSwirlGesture:)];
     

@@ -9,14 +9,16 @@
 #import "NVRotationGestureRecognizer.h"
 #import "CGGeometry+IDPExtensions.h"
 
+CGFloat angleBetweenLinesInDegrees(CGPoint beginLineA,
+                                   CGPoint endLineA,
+                                   CGPoint beginLineB,
+                                   CGPoint endLineB);
+
 @interface NVRotationGestureRecognizer ()
 @property (nonatomic, assign)   CGPoint pointOfCentre;
 @property (nonatomic, assign)   CGFloat innerRadius;
 @property (nonatomic, assign)   CGFloat outerRadius;
 
-CGFloat angleBetweenLinesInDegrees(CGPoint beginLineA,
-                                   CGPoint endLineA,
-                                   CGPoint beginLineB, CGPoint endLineB);
 @end
 
 @implementation NVRotationGestureRecognizer
