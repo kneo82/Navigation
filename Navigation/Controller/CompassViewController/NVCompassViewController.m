@@ -71,36 +71,34 @@ static const CGFloat maxTimeRotate = 5;
 IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
 
 #pragma mark -
+#pragma mark Interface Handling
+
+- (void)handleSwirlGesture:(NVRotationGestureRecognizer *)gestureRecognizer {
+	CGFloat angle = gestureRecognizer.cumulatedAngle;
+	UIGestureRecognizerState state = gestureRecognizer.state;
+	
+	if (UIGestureRecognizerStateEnded == state
+        || UIGestureRecognizerStateCancelled == state
+        || UIGestureRecognizerStateFailed == state)
+    {
+		CGFloat duration = timeFullRotation * fabs(angle) / 360;
+        duration = (maxTimeRotate > duration) ? duration : maxTimeRotate;
+        [self.compassView.compass rotateViewWithDuration:duration byAngleInDegrees:-angle];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            sleep(duration);
+            [self.locationManager startUpdatingHeading];
+        });
+	} else {
+		self.compassView.compass.angle = angle;
+	}
+}
+
+#pragma mark -
 #pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
     CGFloat mHeading = newHeading.magneticHeading;
     self.compassView.compass.angle = mHeading;
-}
-
-#pragma mark -
-#pragma mark NVRotationGestureRecognizerDelegate
-
-- (void) rotation: (CGFloat) angle {
-    self.compassView.compass.angle = angle ;
-}
-
-- (void)endRotation:(CGFloat)angle {
-    CGFloat duration = timeFullRotation * fabs(angle) / 360;
-    duration = (maxTimeRotate > duration) ? duration : maxTimeRotate;
-    [self.compassView.compass rotateViewWithDuration:duration byAngleInDegrees:-angle];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        sleep(duration);
-        [self.locationManager startUpdatingHeading];
-    });
-}
-
-- (void)gestureRecognizerStateFailed:(CGFloat)angle {
-    [self endRotation:angle];
-}
-
-- (void)startRotation {
-    [self.locationManager stopUpdatingHeading];
 }
 
 #pragma mark -
@@ -124,9 +122,10 @@ IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
     self.gestureRecognizer = [[[NVRotationGestureRecognizer alloc]
                                initWithPointOfCentre:pointOfCentre
                                innerRadius:outRadius/5
-                               outerRadius:outRadius
-                               target:self]
+                               outerRadius:outRadius]
                               autorelease];
+    
+    [self.gestureRecognizer addTarget:self action:@selector(handleSwirlGesture:)];
     
     [compassView.compass addGestureRecognizer:self.gestureRecognizer];
 }

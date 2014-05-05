@@ -15,19 +15,19 @@
                   andAngle:(CGFloat)angle
                    andFont:(UIFont *)font
 {
-    CGSize  textSize    = [self sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font.pointSize]}];
+    CGSize textSize = [self sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font.pointSize]}];
     
-    CGContextRef    context =   UIGraphicsGetCurrentContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
-    CGAffineTransform   translation   =   CGAffineTransformMakeTranslation(basePoint.x, basePoint.y);
-    CGAffineTransform   rotation   =  CGAffineTransformMakeRotation(angle);
+    CGAffineTransform translation = CGAffineTransformMakeTranslation(basePoint.x, basePoint.y);
+    CGAffineTransform rotation = CGAffineTransformMakeRotation(angle);
     
     CGContextConcatCTM(context, translation);
     CGContextConcatCTM(context, rotation);
     
-    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
-    
-    [self drawAtPoint:CGPointMake(-1 * textSize.width / 2, -1 * textSize.height / 2) withAttributes:attrsDictionary];
+    NSDictionary *textAtributs = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
+    CGPoint point = CGPointMake(-1 * textSize.width / 2, -1 * textSize.height / 2);
+    [self drawAtPoint:point withAttributes:textAtributs];
 
     CGContextRestoreGState(context);
 }

@@ -9,23 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
-@protocol NVRotationGestureRecognizerDelegate <NSObject>
-
-@optional
-
-- (void)rotation:(CGFloat)angle;
-- (void)endRotation:(CGFloat)angle;
-- (void)gestureRecognizerStateFailed:(CGFloat)angle;
-- (void)startRotation;
-
-@end
-
 @interface NVRotationGestureRecognizer : UIGestureRecognizer
+@property (nonatomic, assign)   CGFloat cumulatedAngle;
 
 - (id)initWithPointOfCentre:(CGPoint)pointOfCentre
                 innerRadius:(CGFloat)innerRadius
-                outerRadius:(CGFloat)outerRadius
-                     target:(id)target;
+                outerRadius:(CGFloat)outerRadius;
 
 - (void)reset;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
