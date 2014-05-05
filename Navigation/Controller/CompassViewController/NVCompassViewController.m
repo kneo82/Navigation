@@ -111,25 +111,24 @@ IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
     CLLocationManager *locationManager = self.locationManager;
     
     [locationManager setDelegate:self];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
     [locationManager startUpdatingHeading];
 }
 
 - (void)setupGestureRecognizer {
     NVCompassView *compassView = self.compassView;
-    CGRect rect = compassView.frame;
+    CGRect rect = compassView.compass.bounds;
     CGPoint pointOfCentre = CGRectGetCenter(rect);
     CGFloat outRadius = rect.size.width / 2;
     
     self.gestureRecognizer = [[[NVRotationGestureRecognizer alloc]
                                initWithPointOfCentre:pointOfCentre
-                               innerRadius:outRadius/3
+                               innerRadius:outRadius/5
                                outerRadius:outRadius
                                target:self]
                               autorelease];
     
-    [compassView addGestureRecognizer:self.gestureRecognizer];
+    [compassView.compass addGestureRecognizer:self.gestureRecognizer];
 }
 
 @end

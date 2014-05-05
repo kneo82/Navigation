@@ -13,12 +13,15 @@
 
 #import "UIViewController+IDPExtensions.h"
 #import "MKMapView+NVExtensions.h"
+#import "UIAlertView+IDPExtensions.h"
 
 static NSString * const kTitle = @"Map";
 static const CLLocationDegrees kNorth   = 0.0;
 static const CLLocationDegrees kSouth   = 180.0;
 static const CLLocationDegrees kWest    = -90.0;
 static const CLLocationDegrees kEast    = 90.0;
+
+static NSString * const kLocationError = @"Unable to determine the  location";
 
 #define kDistanceArray [NSArray arrayWithObjects:@100, @500, @1000, @2000, nil]
 
@@ -122,6 +125,10 @@ IDPViewControllerViewOfClassGetterSynthesize(NVMapView, mapView)
     pinView.annotation = annotation;
     
     return pinView;
+}
+
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
+	[UIAlertView showErrorWithMessage:kLocationError];
 }
 
 @end

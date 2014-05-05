@@ -74,7 +74,7 @@ static const CGFloat kShadowOpacity = 0.7f;
 	layer.shadowOffset = size;
 	layer.shadowOpacity = opacity;
     
-	layer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:self.compass.frame].CGPath;
+	layer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:self.compass.bounds].CGPath;
 }
 
 - (void)rotateViewWithDuration:(CFTimeInterval)duration byAngleInDegrees:(CGFloat)angleInDegrees {
