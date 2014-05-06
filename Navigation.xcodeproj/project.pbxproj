@@ -89,6 +89,7 @@
 		5576AC861902E8F3001EE5FC /* NVMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5576AC851902E8F3001EE5FC /* NVMapAnnotation.m */; };
 		5576AC8C1902F399001EE5FC /* MKMapView+NVExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5576AC8B1902F399001EE5FC /* MKMapView+NVExtensions.m */; };
 		5590B950190E29FA0013CEE3 /* NVRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5590B94F190E29FA0013CEE3 /* NVRotationGestureRecognizer.m */; };
+		55AD40AD1918B25C0056EE7E /* NVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AD40AC1918B25C0056EE7E /* NVTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -264,6 +265,8 @@
 		5576AC8B1902F399001EE5FC /* MKMapView+NVExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+NVExtensions.m"; sourceTree = "<group>"; };
 		5590B94E190E29FA0013CEE3 /* NVRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVRotationGestureRecognizer.h; sourceTree = "<group>"; };
 		5590B94F190E29FA0013CEE3 /* NVRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVRotationGestureRecognizer.m; sourceTree = "<group>"; };
+		55AD40AB1918B25C0056EE7E /* NVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVTabBarController.h; sourceTree = "<group>"; };
+		55AD40AC1918B25C0056EE7E /* NVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -808,6 +811,8 @@
 		55AD40AA1918AE430056EE7E /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
+				55AD40AB1918B25C0056EE7E /* NVTabBarController.h */,
+				55AD40AC1918B25C0056EE7E /* NVTabBarController.m */,
 			);
 			path = TabBarController;
 			sourceTree = "<group>";
@@ -927,6 +932,7 @@
 				551FE2581901258C0018F5F5 /* IDPRetainingDictionary.m in Sources */,
 				551FE2571901258C0018F5F5 /* IDPWeakReference.m in Sources */,
 				551FE2381901258C0018F5F5 /* NSManagedObject+IDPExtensions.m in Sources */,
+				55AD40AD1918B25C0056EE7E /* NVTabBarController.m in Sources */,
 				551FE24A1901258C0018F5F5 /* IDPModel.m in Sources */,
 				551FE162190121E30018F5F5 /* NVAppDelegate.m in Sources */,
 				551FE2461901258C0018F5F5 /* IDPKeyPathObserver.m in Sources */,

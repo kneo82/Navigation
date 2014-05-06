@@ -11,14 +11,13 @@
 #import "NVMapViewController.h"
 #import "NVLocationViewController.h"
 #import "NVCompassViewController.h"
+#import "NVTabBarController.h"
 
 #import "UIWindow+TDExtensions.h"
 #import "UIViewController+IDPInitialization.h"
 #import "NSObject+IDPExtensions.h"
 
 @interface NVAppDelegate ()
-
-- (UITabBarController *)setupTabBarController;
 
 @end
 
@@ -43,7 +42,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     UIWindow *window = self.window;
 
     window.backgroundColor = [UIColor whiteColor];
-    window.rootViewController = [self setupTabBarController];
+    window.rootViewController = [NVTabBarController viewControllerWithDefaultNib];
     [window makeKeyAndVisible];
     
     return YES;
@@ -67,30 +66,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 
-}
-
-#pragma mark -
-#pragma mark Private
-
-- (UITabBarController *)setupTabBarController {
-    NVMapViewController *mapController = nil;
-    mapController = [NVMapViewController viewControllerWithDefaultNib];
-    
-    NVLocationViewController *locationController = nil;
-    locationController = [NVLocationViewController viewControllerWithDefaultNib];
-    
-    NVCompassViewController *compassController = nil;
-    compassController = [NVCompassViewController viewControllerWithDefaultNib];
-    
-    UITabBarController *tabBar = [UITabBarController object];
-    NSArray *controllers = [NSArray arrayWithObjects:mapController,
-                            locationController,
-                            compassController,
-                            nil];
-    
-    tabBar.viewControllers = controllers;
-    
-    return tabBar;
 }
 
 @end
