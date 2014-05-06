@@ -1,3 +1,6 @@
 [submodule "Navigation/IDPKit"]
 	path = Navigation/IDPKit
 	url = https://github.com/idapgroup/IDPKit
+[submodule "Navigation/CoreLocationKit"]
+	path = Navigation/CoreLocationKit
+	url = https://github.com/idapgroup/CoreLocationKit
