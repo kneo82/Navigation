@@ -10,9 +10,8 @@
 
 #import "IDPPropertyMacros.h"
 
-#import "NSString+NVExtensions.h"
 #import "CGGeometry+IDPExtensions.h"
-
+#import "NSObject+IDPExtensions.h"
 #import <QuartzCore/QuartzCore.h>
 
 static const CGFloat margin = 4.0;
@@ -124,17 +123,21 @@ static const NSUInteger kNVDirectionCount	 =	sizeof(kNVDirections) / sizeof(NSSt
     CGFloat radiusFontPosition = radius - lenghtShortDivision * 2 - fontSize;
     
     for (NSUInteger index = 0; index < kNVDirectionCount; index++) {
+		UILabel *directionLabel = [UILabel object];
+		directionLabel.text = kNVDirections[index];
+		[directionLabel sizeToFit];
+		
         CGFloat radians = [self radiansFromDegrees:kNVDirectionAngles[index]];
-        
+		
+		directionLabel.transform = CGAffineTransformMakeRotation(radians + M_PI_2);
+		
         CGPoint coordinateDrawText = [self pointForAngle:radians
                                          centerCoordinat:centerCoordinat
                                                   radius:radiusFontPosition];
         
-        NSString *nameDirection = kNVDirections[index];
-        [nameDirection drawWithBasePoint:coordinateDrawText
-                                andAngle:radians + M_PI_2
-                                 andFont:[UIFont boldSystemFontOfSize:fontSize]];
-    }
+        directionLabel.center = coordinateDrawText;
+		[self addSubview:directionLabel];
+	}
 }
 
 - (void)drawDivisionCompassWithCenterCoordinat:(CGPoint)centerCoordinat

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5507B0781907BE520023DF1F /* NSString+NVExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5507B0771907BE520023DF1F /* NSString+NVExtensions.m */; };
 		551F7B6719064B32002E877A /* NVPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 551F7B6619064B32002E877A /* NVPinView.m */; };
 		551FE152190121E30018F5F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551FE151190121E30018F5F5 /* Foundation.framework */; };
 		551FE154190121E30018F5F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 551FE153190121E30018F5F5 /* CoreGraphics.framework */; };
@@ -103,8 +102,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5507B0761907BE520023DF1F /* NSString+NVExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NVExtensions.h"; sourceTree = "<group>"; };
-		5507B0771907BE520023DF1F /* NSString+NVExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NVExtensions.m"; sourceTree = "<group>"; };
 		551F7B6519064B32002E877A /* NVPinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVPinView.h; sourceTree = "<group>"; };
 		551F7B6619064B32002E877A /* NVPinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVPinView.m; sourceTree = "<group>"; };
 		551FE14E190121E30018F5F5 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -377,8 +374,6 @@
 				551FE186190123840018F5F5 /* UIWindow+TDExtensions.m */,
 				5576AC8A1902F399001EE5FC /* MKMapView+NVExtensions.h */,
 				5576AC8B1902F399001EE5FC /* MKMapView+NVExtensions.m */,
-				5507B0761907BE520023DF1F /* NSString+NVExtensions.h */,
-				5507B0771907BE520023DF1F /* NSString+NVExtensions.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -939,7 +934,6 @@
 				5576AC861902E8F3001EE5FC /* NVMapAnnotation.m in Sources */,
 				551FE2431901258C0018F5F5 /* NSString+IDPExtensions.m in Sources */,
 				551FE25A1901258C0018F5F5 /* IDPURLConnection.m in Sources */,
-				5507B0781907BE520023DF1F /* NSString+NVExtensions.m in Sources */,
 				551FE2591901258C0018F5F5 /* IDPStackArray.m in Sources */,
 				551FE2681901258C0018F5F5 /* UIView+IDPExtensions.m in Sources */,
 				551FE25C1901258C0018F5F5 /* IDPWeakArray.m in Sources */,
