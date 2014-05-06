@@ -69,7 +69,8 @@ static const CLLocationDegrees kNVEast    = 90.0;
         NVMapAnnotation *placemark = nil;
         placemark = [[[NVMapAnnotation alloc] initWithDistance:distance.doubleValue
                                                        degrees:kNVWest
-                                                fromCoordinate:self.coordinate] autorelease];
+                                                fromCoordinate:self.coordinate]
+                                                autorelease];
         
         [annotations addObject:placemark];
     }

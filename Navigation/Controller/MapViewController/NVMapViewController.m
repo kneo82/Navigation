@@ -18,14 +18,7 @@
 
 static NSString * const kNVTitle = @"Map";
 
-//static const CLLocationDegrees kNVNorth   = 0.0;
-//static const CLLocationDegrees kNVSouth   = 180.0;
-//static const CLLocationDegrees kNVWest    = -90.0;
-//static const CLLocationDegrees kNVEast    = 90.0;
-
 static NSString * const kLocationError = @"Unable to determine the  location";
-
-//#define kDistanceArray [NSArray arrayWithObjects:@100, @500, @1000, @2000, nil]
 
 @interface NVMapViewController ()
 @property (nonatomic, readonly) NVMapView *mapView;

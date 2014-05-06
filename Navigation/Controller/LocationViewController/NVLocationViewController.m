@@ -15,6 +15,8 @@
 #import "NSObject+IDPExtensions.h"
 
 static NSString * const kNVTitle = @"Location";
+static NSString * const kNVError = @"ERROR : %@";
+static NSString * const kNVErrorNotFindeLocation = @"Could not find location: %@";
 
 static const CLLocationDistance kNVDistanceForFilter = 100;
 
@@ -82,7 +84,7 @@ IDPViewControllerViewOfClassGetterSynthesize(NVLocationView, locationView)
         if (!error) {
             locationView.placemark = [placemarks firstObject];
         } else {
-            locationView.error.text = [NSString stringWithFormat:@"ERROR : %@", error];
+            locationView.error.text = [NSString stringWithFormat:kNVError, error];
         }
     }];
 }
@@ -90,7 +92,7 @@ IDPViewControllerViewOfClassGetterSynthesize(NVLocationView, locationView)
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
-    NSString *errorString = [NSString stringWithFormat:@"Could not find location: %@", error];
+    NSString *errorString = [NSString stringWithFormat:kNVErrorNotFindeLocation, error];
     self.locationView.error.text = errorString;
 }
 
