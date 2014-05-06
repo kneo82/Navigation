@@ -381,6 +381,7 @@
 		551FE181190122D70018F5F5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				55AD40AA1918AE430056EE7E /* TabBarController */,
 				551FE1841901230C0018F5F5 /* MapViewController */,
 				551FE183190122FF0018F5F5 /* LocationViewController */,
 				551FE182190122EB0018F5F5 /* CompassViewController */,
@@ -802,6 +803,13 @@
 				556699C3191697C4000EC23D /* NVCompassImage.m */,
 			);
 			path = Compass;
+			sourceTree = "<group>";
+		};
+		55AD40AA1918AE430056EE7E /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
