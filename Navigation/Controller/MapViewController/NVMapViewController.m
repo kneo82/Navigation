@@ -103,18 +103,7 @@ IDPViewControllerViewOfClassGetterSynthesize(NVMapView, mapView)
         return nil;
     }
     
-    MKAnnotationView *reusable = nil;
-    reusable = [mapView dequeuePin:[NVPinView class]];
-    
-    MKPinAnnotationView *pinView = (MKPinAnnotationView *)reusable;
-    
-    if (!pinView) {
-        return [[[NVPinView alloc] initWithAnnotation:annotation] autorelease];
-    }
-    
-    pinView.annotation = annotation;
-    
-    return pinView;
+    return [mapView dequeuePin:[NVPinView class] withAnnotation:annotation];
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {

@@ -10,11 +10,18 @@
 
 @implementation MKMapView (NVExtensions)
 
-- (id)dequeuePin:(Class)theClass {
-    MKAnnotationView *annotation = nil;
-    annotation = [self dequeueReusableAnnotationViewWithIdentifier:NSStringFromClass(theClass)];
+- (id)dequeuePin:(Class)theClass  withAnnotation:(id<MKAnnotation>)annotation {
+    NSString *reuseIdentifier = NSStringFromClass(theClass);
+ 
+    MKAnnotationView *pin = [self dequeueReusableAnnotationViewWithIdentifier:reuseIdentifier];
     
-    return annotation;
+    if (!pin) {
+        return [[[theClass alloc] initWithAnnotation:annotation reuseIdentifier:reuseIdentifier] autorelease];
+    }
+    
+    pin.annotation = annotation;
+    
+    return pin;
 }
 
 @end

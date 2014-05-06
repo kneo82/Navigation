@@ -10,6 +10,6 @@
 
 @interface MKMapView (NVExtensions)
 
-- (id)dequeuePin:(Class)theClass;
+- (id)dequeuePin:(Class)theClass  withAnnotation:(id<MKAnnotation>)annotation;
 
 @end
