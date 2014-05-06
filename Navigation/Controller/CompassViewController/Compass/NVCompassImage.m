@@ -14,17 +14,17 @@
 #import "NSObject+IDPExtensions.h"
 #import <QuartzCore/QuartzCore.h>
 
-static const CGFloat margin = 4.0;
-static const CGFloat thicksMainLine = 6.0;
-static const CGFloat fontSize = 16.0;
-static const CGFloat angleSegments = 6.0;
-static const CGFloat angleBigSegments = 30.0;
-static const CGFloat lenghtShortDivision = 15.0;
-static const CGFloat radiusCentralEllipce = 3.0;
+static const CGFloat kNVMargin                  = 4.0;
+static const CGFloat kNVThicksMainLine          = 6.0;
+static const CGFloat kNVFontSize                = 16.0;
+static const CGFloat kNVAngleSegments           = 6.0;
+static const CGFloat kNVAngleBigSegments        = 30.0;
+static const CGFloat kNVLenghtShortDivision     = 15.0;
+static const CGFloat kNVRadiusCentralEllipce    = 3.0;
 
-static NSString * const kNVDirections[]	 = {@"N", @"E", @"S", @"W"};
-static const CGFloat	kNVDirectionAngles[] = {270.0f, 0.0f, 90.0f, 180.0f};
-static const NSUInteger kNVDirectionCount	 =	sizeof(kNVDirections) / sizeof(NSString *);
+static NSString * const kNVDirections[]         = {@"N", @"E", @"S", @"W"};
+static const CGFloat	kNVDirectionAngles[]    = {270.0f, 0.0f, 90.0f, 180.0f};
+static const NSUInteger kNVDirectionCount       = sizeof(kNVDirections) / sizeof(NSString *);
 
 @interface NVCompassImage ()
 
@@ -66,7 +66,7 @@ static const NSUInteger kNVDirectionCount	 =	sizeof(kNVDirections) / sizeof(NSSt
 #pragma mark View Lifecycle
 
 - (void)drawRect:(CGRect)rect {
-    CGFloat width = rect.size.width - 2 * margin;
+    CGFloat width = rect.size.width - 2 * kNVMargin;
     
     CGPoint centerCoordinat = CGRectGetCenter (rect);
     CGFloat radius = width / 2;
@@ -120,7 +120,7 @@ static const NSUInteger kNVDirectionCount	 =	sizeof(kNVDirections) / sizeof(NSSt
 }
 
 - (void)drawDirectionWithCenterCoordinat:(CGPoint)centerCoordinat radiusCircle:(CGFloat)radius {
-    CGFloat radiusFontPosition = radius - lenghtShortDivision * 2 - fontSize;
+    CGFloat radiusFontPosition = radius - kNVLenghtShortDivision * 2 - kNVFontSize;
     
     for (NSUInteger index = 0; index < kNVDirectionCount; index++) {
 		UILabel *directionLabel = [UILabel object];
@@ -146,12 +146,12 @@ static const NSUInteger kNVDirectionCount	 =	sizeof(kNVDirections) / sizeof(NSSt
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    CGContextSetLineWidth(context, thicksMainLine / 2.0);
+    CGContextSetLineWidth(context, kNVThicksMainLine / 2.0);
     
-    for (int i = 0; i < 360 / angleSegments; i++) {
-        NSUInteger countShortDivisionInLong = angleBigSegments / angleSegments;
-        CGFloat lenght = i % countShortDivisionInLong ? lenghtShortDivision : 2 * lenghtShortDivision;
-        CGFloat radians = [self radiansFromDegrees:((angleSegments * i) - 90)];
+    for (int i = 0; i < 360 / kNVAngleSegments; i++) {
+        NSUInteger countShortDivisionInLong = kNVAngleBigSegments / kNVAngleSegments;
+        CGFloat lenght = i % countShortDivisionInLong ? kNVLenghtShortDivision : 2 * kNVLenghtShortDivision;
+        CGFloat radians = [self radiansFromDegrees:((kNVAngleSegments * i) - 90)];
 
         [self drawSegmentLineWithCenterCoordinat:centerCoordinat
                                           radius:radius
@@ -165,7 +165,7 @@ static const NSUInteger kNVDirectionCount	 =	sizeof(kNVDirections) / sizeof(NSSt
 - (void)drawCompassEllipseWithCenterCoordinat:(CGPoint)centerCoordinat radius:(CGFloat)radius {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
-    CGContextSetLineWidth(context, thicksMainLine);
+    CGContextSetLineWidth(context, kNVThicksMainLine);
     
     CGPoint startPoint = CGPointMake (centerCoordinat.x - radius, centerCoordinat.y - radius);
     CGFloat width = radius * 2;
@@ -176,10 +176,10 @@ static const NSUInteger kNVDirectionCount	 =	sizeof(kNVDirections) / sizeof(NSSt
     CGContextFillEllipseInRect(context, circleRect);
     CGContextStrokeEllipseInRect(context, circleRect);
     
-    CGRect ellipseRect = CGRectMake (centerCoordinat.x - radiusCentralEllipce / 2,
-                                     centerCoordinat.y - radiusCentralEllipce / 2,
-                                     radiusCentralEllipce,
-                                     radiusCentralEllipce);
+    CGRect ellipseRect = CGRectMake (centerCoordinat.x - kNVRadiusCentralEllipce / 2,
+                                     centerCoordinat.y - kNVRadiusCentralEllipce / 2,
+                                     kNVRadiusCentralEllipce,
+                                     kNVRadiusCentralEllipce);
     
     CGContextStrokeEllipseInRect(context, ellipseRect);
     

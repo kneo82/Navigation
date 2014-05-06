@@ -14,8 +14,9 @@
 #import "UIViewController+IDPExtensions.h"
 #import "NSObject+IDPExtensions.h"
 
-static NSString * const kTitle = @"Location";
-static const CLLocationDistance kDistanceForFilter = 100;
+static NSString * const kNVTitle = @"Location";
+
+static const CLLocationDistance kNVDistanceForFilter = 100;
 
 @interface NVLocationViewController ()
 @property (nonatomic, readonly) NVLocationView      *locationView;
@@ -42,7 +43,7 @@ static const CLLocationDistance kDistanceForFilter = 100;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
-        self.title = kTitle;
+        self.title = kNVTitle;
     }
     
     return self;
@@ -101,7 +102,7 @@ IDPViewControllerViewOfClassGetterSynthesize(NVLocationView, locationView)
     
     [locationManager setDelegate:self];
     [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    locationManager.distanceFilter = kDistanceForFilter;
+    locationManager.distanceFilter = kNVDistanceForFilter;
     
     [locationManager startUpdatingLocation];
 }

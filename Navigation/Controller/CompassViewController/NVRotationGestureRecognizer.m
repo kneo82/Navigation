@@ -101,10 +101,8 @@ CGFloat angleBetweenLinesInDegrees(CGPoint beginLineA,
         || UIGestureRecognizerStateChanged == state)
     {
         self.state = UIGestureRecognizerStateEnded;
-        
     } else {
         self.state = UIGestureRecognizerStateFailed;
-        NSLog(@"Ended");
     }
 }
 

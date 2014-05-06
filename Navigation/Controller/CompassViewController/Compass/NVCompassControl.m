@@ -12,9 +12,9 @@
 #import "IDPPropertyMacros.h"
 #import "CGGeometry+IDPExtensions.h"
 
-static const CGFloat kAnimationDuration = 0.5;
-static const CGSize kShadowSize	 = {10, 10};
-static const CGFloat kShadowOpacity = 0.7f;
+static const CGFloat kNVAnimationDuration   = 0.5;
+static const CGSize  kNVShadowSize          = {10, 10};
+static const CGFloat kNVShadowOpacity       = 0.7f;
 
 @interface NVCompassControl ()
 @property (nonatomic, retain)	NVCompassImage  *compass;
@@ -45,7 +45,7 @@ static const CGFloat kShadowOpacity = 0.7f;
 }
 
 - (void)setAngle:(CGFloat)angle animated:(BOOL)animated {
-	NSTimeInterval animationDuration = animated ? kAnimationDuration : 0;
+	NSTimeInterval animationDuration = animated ? kNVAnimationDuration : 0;
 	
 	[UIView animateWithDuration:animationDuration animations:^{
 		NVCompassImage *compass = self.compass;
@@ -106,7 +106,7 @@ static const CGFloat kShadowOpacity = 0.7f;
 	[self addSubview:shadow];
 	self.shadow = shadow;
     
-    [self setShadowWithSize:kShadowSize opacity:kShadowOpacity];
+    [self setShadowWithSize:kNVShadowSize opacity:kNVShadowOpacity];
 
 	[self addSubview:compass];
 }

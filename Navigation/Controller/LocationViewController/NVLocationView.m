@@ -9,7 +9,7 @@
 #import "NVLocationView.h"
 #import "IDPPropertyMacros.h"
 
-static NSString * const kAddressKey = @"FormattedAddressLines";
+static NSString * const kNVAddressKey = @"FormattedAddressLines";
 
 @interface NVLocationView ()
 
@@ -52,7 +52,7 @@ static NSString * const kAddressKey = @"FormattedAddressLines";
 #pragma mark Private
 
 - (void)fillPlacemark {
-    NSArray *addressLine = self.placemark.addressDictionary[kAddressKey];
+    NSArray *addressLine = self.placemark.addressDictionary[kNVAddressKey];
     NSMutableString *formattedAddress = [NSMutableString string];
     for (NSString *item in addressLine) {
         [formattedAddress appendFormat:@"%@\n", item];

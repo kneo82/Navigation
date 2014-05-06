@@ -15,11 +15,12 @@
 #import "MKMapView+NVExtensions.h"
 #import "UIAlertView+IDPExtensions.h"
 
-static NSString * const kTitle = @"Map";
-static const CLLocationDegrees kNorth   = 0.0;
-static const CLLocationDegrees kSouth   = 180.0;
-static const CLLocationDegrees kWest    = -90.0;
-static const CLLocationDegrees kEast    = 90.0;
+static NSString * const kNVTitle = @"Map";
+
+static const CLLocationDegrees kNVNorth   = 0.0;
+static const CLLocationDegrees kNVSouth   = 180.0;
+static const CLLocationDegrees kNVWest    = -90.0;
+static const CLLocationDegrees kNVEast    = 90.0;
 
 static NSString * const kLocationError = @"Unable to determine the  location";
 
@@ -41,7 +42,7 @@ static NSString * const kLocationError = @"Unable to determine the  location";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
-        self.title = kTitle;
+        self.title = kNVTitle;
     }
     
     return self;
@@ -99,7 +100,7 @@ IDPViewControllerViewOfClassGetterSynthesize(NVMapView, mapView)
     for (NSNumber *distance  in distances) {
         NVMapAnnotation *placemark = nil;
         placemark = [[[NVMapAnnotation alloc] initWithDistance:distance.doubleValue
-                                                       degrees:kWest
+                                                       degrees:kNVWest
                                                 fromCoordinate:userCoordinate]autorelease];
 
         [mapView addAnnotation:placemark];

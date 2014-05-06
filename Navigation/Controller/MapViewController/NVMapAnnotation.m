@@ -8,7 +8,7 @@
 
 #import "NVMapAnnotation.h"
 
-static const double kEartRadiusInMeter = (6371.0 * 1000.0);
+static const double kNVEartRadiusInMeter = (6371.0 * 1000.0);
 
 @interface NVMapAnnotation ()
 
@@ -65,7 +65,7 @@ static const double kEartRadiusInMeter = (6371.0 * 1000.0);
                                  atDistance:(double)distance
                              atBearingDegrees:(double)bearingDegrees
 {
-    double distanceRadians = distance / kEartRadiusInMeter;
+    double distanceRadians = distance / kNVEartRadiusInMeter;
     double bearingRadians = [self radiansFromDegrees:bearingDegrees];
     double fromLatRadians = [self radiansFromDegrees:fromCoord.latitude];
     double fromLonRadians = [self radiansFromDegrees:fromCoord.longitude];

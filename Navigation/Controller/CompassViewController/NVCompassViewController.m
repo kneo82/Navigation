@@ -16,9 +16,10 @@
 #import "NSObject+IDPExtensions.h"
 #import "UIViewController+IDPExtensions.h"
 
-static NSString * const kTitle = @"Compass";
-static const CGFloat timeFullRotation = 2;
-static const CGFloat maxTimeRotate = 5;
+static NSString * const kNVTitle            = @"Compass";
+
+static const CGFloat    kNVTimeFullRotation = 2;
+static const CGFloat    kNVMaxTimeRotate    = 5;
 
 @interface NVCompassViewController ()
 @property (nonatomic, retain)   CLLocationManager   *locationManager;
@@ -49,7 +50,7 @@ static const CGFloat maxTimeRotate = 5;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = kTitle;
+        self.title = kNVTitle;
     }
     
     return self;
@@ -81,8 +82,8 @@ IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
         || UIGestureRecognizerStateCancelled == state
         || UIGestureRecognizerStateFailed == state)
     {
-		CGFloat duration = timeFullRotation * fabs(angle) / 360;
-        duration = (maxTimeRotate > duration) ? duration : maxTimeRotate;
+		CGFloat duration = kNVTimeFullRotation * fabs(angle) / 360;
+        duration = (kNVMaxTimeRotate > duration) ? duration : kNVMaxTimeRotate;
         [self.compassView.compass rotateViewWithDuration:duration byAngleInDegrees:-angle];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             sleep(duration);
