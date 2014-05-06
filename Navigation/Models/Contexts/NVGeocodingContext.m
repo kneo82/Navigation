@@ -10,4 +10,15 @@
 
 @implementation NVGeocodingContext
 
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+	self.user = nil;
+	[self cancel];
+	
+	[super dealloc];
+}
+
 @end

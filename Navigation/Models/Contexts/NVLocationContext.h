@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NVLocationContext : NSObject
+#import "IDPModel.h"
+
+@class  NVUser;
+
+@interface NVLocationContext : IDPModel
+@property (nonatomic, retain)   NVUser *user;
 
 @end

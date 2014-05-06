@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NVGeocodingContext : NSObject
+#import "IDPModel.h"
+
+@class  NVUser;
+
+@interface NVGeocodingContext : IDPModel
+@property (nonatomic, retain)   NVUser *user;
 
 @end
