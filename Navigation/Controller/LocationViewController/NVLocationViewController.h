@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class  NVUser;
+
 @interface NVLocationViewController : UIViewController <CLLocationManagerDelegate>
+@property (nonatomic, retain)   NVUser *user;
 
 @end

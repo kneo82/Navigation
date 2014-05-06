@@ -91,6 +91,7 @@
 		5590B950190E29FA0013CEE3 /* NVRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5590B94F190E29FA0013CEE3 /* NVRotationGestureRecognizer.m */; };
 		55AD40AD1918B25C0056EE7E /* NVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AD40AC1918B25C0056EE7E /* NVTabBarController.m */; };
 		55AD40B21918B7620056EE7E /* NVMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AD40B11918B7620056EE7E /* NVMath.m */; };
+		55AD40B61918D6290056EE7E /* NVUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AD40B51918D6290056EE7E /* NVUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +271,8 @@
 		55AD40AC1918B25C0056EE7E /* NVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVTabBarController.m; sourceTree = "<group>"; };
 		55AD40B01918B7620056EE7E /* NVMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVMath.h; sourceTree = "<group>"; };
 		55AD40B11918B7620056EE7E /* NVMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVMath.m; sourceTree = "<group>"; };
+		55AD40B41918D6290056EE7E /* NVUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVUser.h; sourceTree = "<group>"; };
+		55AD40B51918D6290056EE7E /* NVUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,6 +339,7 @@
 				551FE160190121E30018F5F5 /* NVAppDelegate.h */,
 				551FE161190121E30018F5F5 /* NVAppDelegate.m */,
 				551FE1A51901258B0018F5F5 /* IDPKit */,
+				55AD40B31918D5F50056EE7E /* Models */,
 				551FE181190122D70018F5F5 /* Controller */,
 				551FE180190122A50018F5F5 /* Category */,
 				551FE163190121E30018F5F5 /* Images.xcassets */,
@@ -822,6 +826,15 @@
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
+		55AD40B31918D5F50056EE7E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				55AD40B41918D6290056EE7E /* NVUser.h */,
+				55AD40B51918D6290056EE7E /* NVUser.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -955,6 +968,7 @@
 				551FE25A1901258C0018F5F5 /* IDPURLConnection.m in Sources */,
 				551FE2591901258C0018F5F5 /* IDPStackArray.m in Sources */,
 				551FE2681901258C0018F5F5 /* UIView+IDPExtensions.m in Sources */,
+				55AD40B61918D6290056EE7E /* NVUser.m in Sources */,
 				551FE25C1901258C0018F5F5 /* IDPWeakArray.m in Sources */,
 				551FE24D1901258C0018F5F5 /* IDPMutableDictionary.m in Sources */,
 				551FE15E190121E30018F5F5 /* main.m in Sources */,

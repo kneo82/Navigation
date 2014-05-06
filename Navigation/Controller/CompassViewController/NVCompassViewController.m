@@ -42,6 +42,7 @@ static const CGFloat    kNVMaxTimeRotate    = 5;
 - (void)dealloc {
     self.locationManager = nil;
     self.gestureRecognizer = nil;
+    self.user = nil;
     
     [super dealloc];
 }

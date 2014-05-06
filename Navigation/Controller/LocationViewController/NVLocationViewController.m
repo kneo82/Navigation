@@ -35,6 +35,7 @@ static const CLLocationDistance kNVDistanceForFilter = 100;
 
 - (void)dealloc {
     self.locationManager = nil;
+    self.user = nil;
     
     [super dealloc];
 }

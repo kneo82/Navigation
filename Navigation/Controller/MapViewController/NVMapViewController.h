@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+@class  NVUser;
+
 @interface NVMapViewController : UIViewController <MKMapViewDelegate>
+@property (nonatomic, retain)   NVUser *user;
 
 @end

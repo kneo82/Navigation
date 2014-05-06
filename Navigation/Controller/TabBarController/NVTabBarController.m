@@ -11,13 +11,14 @@
 #import "NVMapViewController.h"
 #import "NVLocationViewController.h"
 #import "NVCompassViewController.h"
+#import "NVUser.h"
 
 #import "UIViewController+IDPInitialization.h"
 #import "NSObject+IDPExtensions.h"
 
 @interface NVTabBarController ()
 
-- (NSArray *)setupControllers;
+- (void)setupControllers;
 
 @end
 
@@ -29,7 +30,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.viewControllers = [self setupControllers];
+        [self setupControllers];
     }
     
     return self;
@@ -38,7 +39,7 @@
 #pragma mark -
 #pragma mark Private
 
-- (NSArray *)setupControllers {
+- (void)setupControllers {
     NVMapViewController *mapController = nil;
     mapController = [NVMapViewController viewControllerWithDefaultNib];
     
@@ -53,7 +54,11 @@
                             compassController,
                             nil];
     
-    return controllers;
+    self.viewControllers = controllers;
+    
+    NVUser *user = [NVUser object];
+    [self.viewControllers makeObjectsPerformSelector:@selector(setUser:)
+													  withObject:user];
 }
 
 @end

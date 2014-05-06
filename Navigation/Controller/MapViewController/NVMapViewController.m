@@ -10,6 +10,7 @@
 #import "NVMapView.h"
 #import "NVMapAnnotation.h"
 #import "NVPinView.h"
+#import "NVUser.h"
 
 #import "UIViewController+IDPExtensions.h"
 #import "MKMapView+NVExtensions.h"
@@ -17,14 +18,14 @@
 
 static NSString * const kNVTitle = @"Map";
 
-static const CLLocationDegrees kNVNorth   = 0.0;
-static const CLLocationDegrees kNVSouth   = 180.0;
-static const CLLocationDegrees kNVWest    = -90.0;
-static const CLLocationDegrees kNVEast    = 90.0;
+//static const CLLocationDegrees kNVNorth   = 0.0;
+//static const CLLocationDegrees kNVSouth   = 180.0;
+//static const CLLocationDegrees kNVWest    = -90.0;
+//static const CLLocationDegrees kNVEast    = 90.0;
 
 static NSString * const kLocationError = @"Unable to determine the  location";
 
-#define kDistanceArray [NSArray arrayWithObjects:@100, @500, @1000, @2000, nil]
+//#define kDistanceArray [NSArray arrayWithObjects:@100, @500, @1000, @2000, nil]
 
 @interface NVMapViewController ()
 @property (nonatomic, readonly) NVMapView *mapView;
@@ -37,6 +38,12 @@ static NSString * const kLocationError = @"Unable to determine the  location";
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.user = nil;
+    
+    [super dealloc];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -79,21 +86,14 @@ IDPViewControllerViewOfClassGetterSynthesize(NVMapView, mapView)
 - (void)        mapView:(MKMapView *)mapView
   didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    CLLocationCoordinate2D userCoordinate = userLocation.coordinate;
-
-    [mapView setCenterCoordinate:userCoordinate animated:YES];
-    [mapView removeAnnotations:mapView.annotations];
-    
-    NSArray *distances = kDistanceArray;
-    
-    for (NSNumber *distance  in distances) {
-        NVMapAnnotation *placemark = nil;
-        placemark = [[[NVMapAnnotation alloc] initWithDistance:distance.doubleValue
-                                                       degrees:kNVWest
-                                                fromCoordinate:userCoordinate]autorelease];
-
-        [mapView addAnnotation:placemark];
-    }
+    NVUser *user = self.user;
+	
+	user.coordinate = userLocation.coordinate;
+	[mapView setCenterCoordinate:user.coordinate animated:YES];
+	
+	[mapView removeAnnotations:user.annotations];
+	[user createAnnotations];
+	[mapView addAnnotations:user.annotations];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView

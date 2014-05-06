@@ -11,7 +11,10 @@
 
 #import "NVRotationGestureRecognizer.h"
 
+@class  NVUser;
+
 @interface NVCompassViewController : UIViewController <CLLocationManagerDelegate>
+@property (nonatomic, retain)   NVUser *user;
 
 @end
 
