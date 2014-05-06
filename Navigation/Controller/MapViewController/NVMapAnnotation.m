@@ -9,8 +9,6 @@
 #import "NVMapAnnotation.h"
 #import "NVMath.h"
 
-static const double kNVEartRadiusInMeter = (6371.0 * 1000.0);
-
 @interface NVMapAnnotation ()
 
 @end

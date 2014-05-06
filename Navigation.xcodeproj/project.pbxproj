@@ -84,6 +84,10 @@
 		551FE26A1901258C0018F5F5 /* UIViewController+IDPInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 551FE2361901258C0018F5F5 /* UIViewController+IDPInitialization.m */; };
 		556699C4191697C4000EC23D /* NVCompassControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 556699C1191697C4000EC23D /* NVCompassControl.m */; };
 		556699C5191697C4000EC23D /* NVCompassImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 556699C3191697C4000EC23D /* NVCompassImage.m */; };
+		556699D819191387000EC23D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 556699D219191387000EC23D /* .gitignore */; };
+		556699D919191387000EC23D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 556699D319191387000EC23D /* LICENSE */; };
+		556699DA19191387000EC23D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 556699D419191387000EC23D /* README.md */; };
+		556699DB19191387000EC23D /* IDPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 556699D719191387000EC23D /* IDPLocationManager.m */; };
 		5576AC8119027EAD001EE5FC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5576AC8019027EAD001EE5FC /* CoreLocation.framework */; };
 		5576AC83190283DE001EE5FC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5576AC82190283DE001EE5FC /* MapKit.framework */; };
 		5576AC861902E8F3001EE5FC /* NVMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5576AC851902E8F3001EE5FC /* NVMapAnnotation.m */; };
@@ -259,6 +263,11 @@
 		556699C1191697C4000EC23D /* NVCompassControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVCompassControl.m; sourceTree = "<group>"; };
 		556699C2191697C4000EC23D /* NVCompassImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVCompassImage.h; sourceTree = "<group>"; };
 		556699C3191697C4000EC23D /* NVCompassImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVCompassImage.m; sourceTree = "<group>"; };
+		556699D219191387000EC23D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		556699D319191387000EC23D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		556699D419191387000EC23D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		556699D619191387000EC23D /* IDPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPLocationManager.h; sourceTree = "<group>"; };
+		556699D719191387000EC23D /* IDPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPLocationManager.m; sourceTree = "<group>"; };
 		5576AC8019027EAD001EE5FC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5576AC82190283DE001EE5FC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5576AC841902E8F3001EE5FC /* NVMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVMapAnnotation.h; sourceTree = "<group>"; };
@@ -464,6 +473,7 @@
 		551FE1A81901258B0018F5F5 /* submodules */ = {
 			isa = PBXGroup;
 			children = (
+				556699D119191387000EC23D /* CoreLocationKit */,
 				551FE1A91901258B0018F5F5 /* ActiveRecordKit */,
 				551FE1B41901258C0018F5F5 /* CommonKit */,
 				551FE1CB1901258C0018F5F5 /* DataKit */,
@@ -817,6 +827,26 @@
 			path = Compass;
 			sourceTree = "<group>";
 		};
+		556699D119191387000EC23D /* CoreLocationKit */ = {
+			isa = PBXGroup;
+			children = (
+				556699D219191387000EC23D /* .gitignore */,
+				556699D319191387000EC23D /* LICENSE */,
+				556699D419191387000EC23D /* README.md */,
+				556699D519191387000EC23D /* src */,
+			);
+			path = CoreLocationKit;
+			sourceTree = "<group>";
+		};
+		556699D519191387000EC23D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				556699D619191387000EC23D /* IDPLocationManager.h */,
+				556699D719191387000EC23D /* IDPLocationManager.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		55AD40AA1918AE430056EE7E /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -914,7 +944,10 @@
 				551FE15C190121E30018F5F5 /* InfoPlist.strings in Resources */,
 				551FE1A1190124700018F5F5 /* NVMapViewController.xib in Resources */,
 				551FE199190124480018F5F5 /* NVLocationViewController.xib in Resources */,
+				556699D919191387000EC23D /* LICENSE in Resources */,
 				551FE164190121E30018F5F5 /* Images.xcassets in Resources */,
+				556699D819191387000EC23D /* .gitignore in Resources */,
+				556699DA19191387000EC23D /* README.md in Resources */,
 				551FE191190124160018F5F5 /* NVCompassViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -995,6 +1028,7 @@
 				551FE2651901258C0018F5F5 /* UINib+IDPExtensions.m in Sources */,
 				551FE2601901258C0018F5F5 /* IDPShareObject.m in Sources */,
 				551FE24E1901258C0018F5F5 /* IDPModelMixin.m in Sources */,
+				556699DB19191387000EC23D /* IDPLocationManager.m in Sources */,
 				551FE25B1901258C0018F5F5 /* IDPURLRequest.m in Sources */,
 				551FE23C1901258C0018F5F5 /* IDPMath.m in Sources */,
 				55AD40B21918B7620056EE7E /* NVMath.m in Sources */,
