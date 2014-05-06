@@ -17,6 +17,6 @@
 @property (nonatomic, assign)	CGFloat			angle;
 
 - (void)setAngle:(CGFloat)angle animated:(BOOL)animated;
-- (void)rotateViewWithDuration:(CFTimeInterval)duration byAngleInDegrees:(CGFloat)angleInDegrees;
+- (void)rotateViewWithDuration:(CFTimeInterval)duration byAngle:(CGFloat)angle;
 
 @end

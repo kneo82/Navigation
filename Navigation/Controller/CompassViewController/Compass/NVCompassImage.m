@@ -8,6 +8,7 @@
 
 #import "NVCompassImage.h"
 
+#import "NVMath.h"
 #import "IDPPropertyMacros.h"
 
 #import "CGGeometry+IDPExtensions.h"
@@ -28,23 +29,16 @@ static const NSUInteger kNVDirectionCount       = sizeof(kNVDirections) / sizeof
 
 @interface NVCompassImage ()
 
-- (CGFloat)radiansFromDegrees:(CGFloat)degrees;
+- (void)drawSegmentLineWithCenter:(CGPoint)center
+                           radius:(CGFloat)radius
+                            angle:(CGFloat)radians
+                           lenght:(CGFloat)lenght;
 
-- (CGPoint)pointForAngle:(CGFloat)angle
-         centerCoordinat:(CGPoint)centerCoordinat
-                  radius:(CGFloat)radius;
+- (void)drawDirectionWithCenter:(CGPoint)center radius:(CGFloat)radius;
 
-- (void)drawSegmentLineWithCenterCoordinat:(CGPoint)centerCoordinat
-                                    radius:(CGFloat)radius
-                            angleInRadians:(CGFloat)radians
-                                lenghtLine:(CGFloat)lenght;
+- (void)drawDivisionCompassWithCenter:(CGPoint)center radius:(CGFloat)radius;
 
-- (void)drawDirectionWithCenterCoordinat:(CGPoint)centerCoordinat radiusCircle:(CGFloat)radius;
-
-- (void)drawDivisionCompassWithCenterCoordinat:(CGPoint)centerCoordinat
-                                        radius:(CGFloat)radius;
-
-- (void)drawCompassEllipseWithCenterCoordinat:(CGPoint)centerCoordinat radius:(CGFloat)radius;
+- (void)drawCompassEllipseWithCenter:(CGPoint)center radius:(CGFloat)radius;
 
 @end
 
@@ -68,45 +62,31 @@ static const NSUInteger kNVDirectionCount       = sizeof(kNVDirections) / sizeof
 - (void)drawRect:(CGRect)rect {
     CGFloat width = rect.size.width - 2 * kNVMargin;
     
-    CGPoint centerCoordinat = CGRectGetCenter (rect);
+    CGPoint center = CGRectGetCenter (rect);
     CGFloat radius = width / 2;
     
-    [self drawCompassEllipseWithCenterCoordinat:centerCoordinat radius:radius];
+    [self drawCompassEllipseWithCenter:center radius:radius];
 
-    [self drawDivisionCompassWithCenterCoordinat:centerCoordinat radius:radius];
+    [self drawDivisionCompassWithCenter:center radius:radius];
     
-    [self drawDirectionWithCenterCoordinat:centerCoordinat radiusCircle:radius];
+    [self drawDirectionWithCenter:center radius:radius];
 }
 
 #pragma mark -
 #pragma mark Private
 
-- (CGFloat)radiansFromDegrees:(CGFloat)degrees {
-    return degrees * (M_PI/180.0);
-}
-
-- (CGPoint)pointForAngle:(CGFloat)angle
-         centerCoordinat:(CGPoint)centerCoordinat
-                  radius:(CGFloat)radius
-{
-    CGFloat x = centerCoordinat.x + radius * cos(angle);
-    CGFloat y = centerCoordinat.y + radius * sin(angle);
-    
-    return CGPointMake(x, y);
-}
-
-- (void)drawSegmentLineWithCenterCoordinat:(CGPoint)centerCoordinat
-                          radius:(CGFloat)radius
-                  angleInRadians:(CGFloat)radians
-                      lenghtLine:(CGFloat)lenght
+- (void)drawSegmentLineWithCenter:(CGPoint)center
+                           radius:(CGFloat)radius
+                            angle:(CGFloat)radians
+                           lenght:(CGFloat)lenght;
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    CGPoint point1 = [self pointForAngle:radians centerCoordinat:centerCoordinat radius:radius];
+    CGPoint point1 = pointForAngleOnEllipse (radians, center, radius);
     
     CGFloat radius2 = radius - lenght;
-    CGPoint point2 = [self pointForAngle:radians centerCoordinat:centerCoordinat radius:radius2];
+    CGPoint point2 = pointForAngleOnEllipse (radians, center, radius2);
     
     [[UIColor blackColor] setStroke];
     if (radians <= -M_PI_2) {
@@ -119,7 +99,7 @@ static const NSUInteger kNVDirectionCount       = sizeof(kNVDirections) / sizeof
     CGContextRestoreGState(context);
 }
 
-- (void)drawDirectionWithCenterCoordinat:(CGPoint)centerCoordinat radiusCircle:(CGFloat)radius {
+- (void)drawDirectionWithCenter:(CGPoint)center radius:(CGFloat)radius {
     CGFloat radiusFontPosition = radius - kNVLenghtShortDivision * 2 - kNVFontSize;
     
     for (NSUInteger index = 0; index < kNVDirectionCount; index++) {
@@ -127,22 +107,17 @@ static const NSUInteger kNVDirectionCount       = sizeof(kNVDirections) / sizeof
 		directionLabel.text = kNVDirections[index];
 		[directionLabel sizeToFit];
 		
-        CGFloat radians = [self radiansFromDegrees:kNVDirectionAngles[index]];
+        CGFloat radians = DEGREES_TO_RADIANS(kNVDirectionAngles[index]);
 		
 		directionLabel.transform = CGAffineTransformMakeRotation(radians + M_PI_2);
 		
-        CGPoint coordinateDrawText = [self pointForAngle:radians
-                                         centerCoordinat:centerCoordinat
-                                                  radius:radiusFontPosition];
-        
+        CGPoint coordinateDrawText = pointForAngleOnEllipse(radians, center, radiusFontPosition);
         directionLabel.center = coordinateDrawText;
 		[self addSubview:directionLabel];
 	}
 }
 
-- (void)drawDivisionCompassWithCenterCoordinat:(CGPoint)centerCoordinat
-                                        radius:(CGFloat)radius
-{
+- (void)drawDivisionCompassWithCenter:(CGPoint)center radius:(CGFloat)radius {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
@@ -151,23 +126,20 @@ static const NSUInteger kNVDirectionCount       = sizeof(kNVDirections) / sizeof
     for (int i = 0; i < 360 / kNVAngleSegments; i++) {
         NSUInteger countShortDivisionInLong = kNVAngleBigSegments / kNVAngleSegments;
         CGFloat lenght = i % countShortDivisionInLong ? kNVLenghtShortDivision : 2 * kNVLenghtShortDivision;
-        CGFloat radians = [self radiansFromDegrees:((kNVAngleSegments * i) - 90)];
+        CGFloat radians = DEGREES_TO_RADIANS((kNVAngleSegments * i) - 90);
 
-        [self drawSegmentLineWithCenterCoordinat:centerCoordinat
-                                          radius:radius
-                                  angleInRadians:radians
-                                      lenghtLine:lenght ];
+        [self drawSegmentLineWithCenter:center radius:radius angle:radians lenght:lenght];
     }
     
     CGContextRestoreGState(context);
 }
 
-- (void)drawCompassEllipseWithCenterCoordinat:(CGPoint)centerCoordinat radius:(CGFloat)radius {
+- (void)drawCompassEllipseWithCenter:(CGPoint)center radius:(CGFloat)radius {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     CGContextSetLineWidth(context, kNVThicksMainLine);
     
-    CGPoint startPoint = CGPointMake (centerCoordinat.x - radius, centerCoordinat.y - radius);
+    CGPoint startPoint = CGPointMake (center.x - radius, center.y - radius);
     CGFloat width = radius * 2;
     CGRect circleRect = CGRectMake(startPoint.x, startPoint.y, width, width);
 
@@ -176,8 +148,8 @@ static const NSUInteger kNVDirectionCount       = sizeof(kNVDirections) / sizeof
     CGContextFillEllipseInRect(context, circleRect);
     CGContextStrokeEllipseInRect(context, circleRect);
     
-    CGRect ellipseRect = CGRectMake (centerCoordinat.x - kNVRadiusCentralEllipce / 2,
-                                     centerCoordinat.y - kNVRadiusCentralEllipce / 2,
+    CGRect ellipseRect = CGRectMake (center.x - kNVRadiusCentralEllipce / 2,
+                                     center.y - kNVRadiusCentralEllipce / 2,
                                      kNVRadiusCentralEllipce,
                                      kNVRadiusCentralEllipce);
     

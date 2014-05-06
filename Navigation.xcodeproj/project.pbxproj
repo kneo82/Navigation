@@ -90,6 +90,7 @@
 		5576AC8C1902F399001EE5FC /* MKMapView+NVExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5576AC8B1902F399001EE5FC /* MKMapView+NVExtensions.m */; };
 		5590B950190E29FA0013CEE3 /* NVRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5590B94F190E29FA0013CEE3 /* NVRotationGestureRecognizer.m */; };
 		55AD40AD1918B25C0056EE7E /* NVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AD40AC1918B25C0056EE7E /* NVTabBarController.m */; };
+		55AD40B21918B7620056EE7E /* NVMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AD40B11918B7620056EE7E /* NVMath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,6 +268,8 @@
 		5590B94F190E29FA0013CEE3 /* NVRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVRotationGestureRecognizer.m; sourceTree = "<group>"; };
 		55AD40AB1918B25C0056EE7E /* NVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVTabBarController.h; sourceTree = "<group>"; };
 		55AD40AC1918B25C0056EE7E /* NVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVTabBarController.m; sourceTree = "<group>"; };
+		55AD40B01918B7620056EE7E /* NVMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVMath.h; sourceTree = "<group>"; };
+		55AD40B11918B7620056EE7E /* NVMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVMath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +340,8 @@
 				551FE180190122A50018F5F5 /* Category */,
 				551FE163190121E30018F5F5 /* Images.xcassets */,
 				551FE158190121E30018F5F5 /* Supporting Files */,
+				55AD40B01918B7620056EE7E /* NVMath.h */,
+				55AD40B11918B7620056EE7E /* NVMath.m */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -978,6 +983,7 @@
 				551FE24E1901258C0018F5F5 /* IDPModelMixin.m in Sources */,
 				551FE25B1901258C0018F5F5 /* IDPURLRequest.m in Sources */,
 				551FE23C1901258C0018F5F5 /* IDPMath.m in Sources */,
+				55AD40B21918B7620056EE7E /* NVMath.m in Sources */,
 				551FE25D1901258C0018F5F5 /* CALayer+RoundedCorners.m in Sources */,
 				551FE23B1901258C0018F5F5 /* CGGeometry+IDPExtensions.m in Sources */,
 				551FE24C1901258C0018F5F5 /* IDPMutableArray.m in Sources */,

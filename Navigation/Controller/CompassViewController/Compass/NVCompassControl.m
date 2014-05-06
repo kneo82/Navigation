@@ -8,6 +8,7 @@
 
 #import "NVCompassControl.h"
 #import "NVCompassImage.h"
+#import "NVMath.h"
 
 #import "IDPPropertyMacros.h"
 #import "CGGeometry+IDPExtensions.h"
@@ -16,12 +17,14 @@ static const CGFloat kNVAnimationDuration   = 0.5;
 static const CGSize  kNVShadowSize          = {10, 10};
 static const CGFloat kNVShadowOpacity       = 0.7f;
 
+static NSString * const kNVAnimationKeyPath = @"transform.rotation.z";
+static NSString * const kNVAnimationKey     = @"rotationAnimation";
+
 @interface NVCompassControl ()
 @property (nonatomic, retain)	NVCompassImage  *compass;
 @property (nonatomic, retain)	UIView          *shadow;
 
 - (void)setup;
-- (CGFloat)radiansFromDegrees:(CGFloat)degrees;
 
 @end
 
@@ -49,10 +52,10 @@ static const CGFloat kNVShadowOpacity       = 0.7f;
 	
 	[UIView animateWithDuration:animationDuration animations:^{
 		NVCompassImage *compass = self.compass;
-		compass.transform = CGAffineTransformMakeRotation([self radiansFromDegrees:angle]);
-		
-		IDPNonatomicAssignPropertySynthesize(_angle, angle);
-	}];
+		compass.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(angle));
+	} completion:^(BOOL finished) {
+        IDPNonatomicAssignPropertySynthesize(_angle, angle);
+    }];
 }
 
 #pragma mark -
@@ -77,20 +80,20 @@ static const CGFloat kNVShadowOpacity       = 0.7f;
 	layer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:self.compass.bounds].CGPath;
 }
 
-- (void)rotateViewWithDuration:(CFTimeInterval)duration byAngleInDegrees:(CGFloat)angleInDegrees {
-    CGFloat angleInRadians = [self radiansFromDegrees:angleInDegrees];
+- (void)rotateViewWithDuration:(CFTimeInterval)duration byAngle:(CGFloat)angle {
+    CGFloat radians = DEGREES_TO_RADIANS(angle);
     [CATransaction begin];
     CABasicAnimation *rotationAnimation;
-    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.byValue = [NSNumber numberWithFloat:angleInRadians];
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:kNVAnimationKeyPath];
+    rotationAnimation.byValue = [NSNumber numberWithFloat:radians];
     rotationAnimation.duration = duration;
     rotationAnimation.removedOnCompletion = YES;
     
     [CATransaction setCompletionBlock:^{
-        self.angle += angleInDegrees;
+        self.angle += angle;
     }];
     
-    [self.compass.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    [self.compass.layer addAnimation:rotationAnimation forKey:kNVAnimationKey];
     [CATransaction commit];
 }
 
@@ -109,10 +112,6 @@ static const CGFloat kNVShadowOpacity       = 0.7f;
     [self setShadowWithSize:kNVShadowSize opacity:kNVShadowOpacity];
 
 	[self addSubview:compass];
-}
-
-- (CGFloat)radiansFromDegrees:(CGFloat)degrees {
-    return degrees * (M_PI / 180.0);
 }
 
 @end

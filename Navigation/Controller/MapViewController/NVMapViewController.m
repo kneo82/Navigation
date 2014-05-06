@@ -68,17 +68,6 @@ static NSString * const kLocationError = @"Unable to determine the  location";
     [map setRegion:region animated:YES];
 }
 
-- (CLLocationCoordinate2D)coordinateForDistance:(CLLocationDistance)distance
-                                 fromCoordinate:(CLLocationCoordinate2D)coordinate
-{
-    MKMapPoint point = MKMapPointForCoordinate(coordinate);
-    CLLocationDistance pointsPerMeter = MKMapPointsPerMeterAtLatitude(coordinate.latitude);
-
-    double latPoints = distance * pointsPerMeter;
-    point.x -= latPoints;
-    return MKCoordinateForMapPoint(point);
-}
-
 #pragma mark -
 #pragma mark Accessors
 

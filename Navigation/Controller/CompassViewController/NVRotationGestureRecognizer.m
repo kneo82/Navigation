@@ -7,12 +7,9 @@
 //
 
 #import "NVRotationGestureRecognizer.h"
-#import "CGGeometry+IDPExtensions.h"
+#import "NVMath.h"
 
-CGFloat angleBetweenLinesInDegrees(CGPoint beginLineA,
-                                   CGPoint endLineA,
-                                   CGPoint beginLineB,
-                                   CGPoint endLineB);
+#import "CGGeometry+IDPExtensions.h"
 
 @interface NVRotationGestureRecognizer ()
 @property (nonatomic, assign)   CGPoint pointOfCentre;
@@ -80,11 +77,7 @@ CGFloat angleBetweenLinesInDegrees(CGPoint beginLineA,
     if (self.innerRadius <= distance && distance <= self.outerRadius) {
         CGFloat angle = angleBetweenLinesInDegrees(pointOfCentre, prevPoint, pointOfCentre, nowPoint);
         
-        if (180 < angle) {
-            angle -= 360;
-        } else if (-180 > angle) {
-            angle += 360;
-        }
+        angle = normalizeAngle(angle);
         
         self.cumulatedAngle += angle;
         self.state = UIGestureRecognizerStateChanged;
@@ -110,25 +103,6 @@ CGFloat angleBetweenLinesInDegrees(CGPoint beginLineA,
     [super touchesCancelled:touches withEvent:event];
     
     self.state = UIGestureRecognizerStateCancelled;
-}
-
-#pragma mark -
-#pragma mark Private
-
-CGFloat angleBetweenLinesInDegrees(CGPoint beginLineA,
-                                   CGPoint endLineA,
-                                   CGPoint beginLineB,
-                                   CGPoint endLineB)
-{
-    CGFloat a = endLineA.x - beginLineA.x;
-    CGFloat b = endLineA.y - beginLineA.y;
-    CGFloat c = endLineB.x - beginLineB.x;
-    CGFloat d = endLineB.y - beginLineB.y;
-    
-    CGFloat atanA = atan2(a, b);
-    CGFloat atanB = atan2(c, d);
-
-    return (atanA - atanB) * 180 / M_PI;
 }
 
 @end

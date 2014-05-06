@@ -84,7 +84,7 @@ IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
     {
 		CGFloat duration = kNVTimeFullRotation * fabs(angle) / 360;
         duration = (kNVMaxTimeRotate > duration) ? duration : kNVMaxTimeRotate;
-        [self.compassView.compass rotateViewWithDuration:duration byAngleInDegrees:-angle];
+        [self.compassView.compass rotateViewWithDuration:duration byAngle:-angle];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             sleep(duration);
             [self.locationManager startUpdatingHeading];
