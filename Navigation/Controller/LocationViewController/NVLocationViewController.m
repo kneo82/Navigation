@@ -10,6 +10,7 @@
 
 #import "NVLocationViewController.h"
 #import "NVLocationView.h"
+#import "NVUser.h"
 
 #import "UIViewController+IDPExtensions.h"
 #import "NSObject+IDPExtensions.h"
@@ -61,6 +62,14 @@ static const CLLocationDistance kNVDistanceForFilter = 100;
     [self setupLocationManager];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"viewDidAppear");
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"viewDidDisappear");
+}
+
 #pragma mark -
 #pragma mark Accessors
 
@@ -72,6 +81,7 @@ IDPViewControllerViewOfClassGetterSynthesize(NVLocationView, locationView)
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject];
     CLLocationCoordinate2D coordinate = location.coordinate;
+    self.user.coordinate = coordinate;
     
     NVLocationView *locationView = self.locationView;
     CLGeocoder *coder = [CLGeocoder object];
