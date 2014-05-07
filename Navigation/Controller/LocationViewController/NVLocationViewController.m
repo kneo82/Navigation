@@ -19,10 +19,6 @@
 #import "NSObject+IDPExtensions.h"
 
 static NSString * const kNVTitle = @"Location";
-static NSString * const kNVError = @"ERROR : %@";
-static NSString * const kNVErrorNotFindeLocation = @"Could not find location: %@";
-
-static const CLLocationDistance kNVDistanceForFilter = 100;
 
 @interface NVLocationViewController () <IDPModelObserver>
 @property (nonatomic, readonly) NVLocationView      *locationView;
