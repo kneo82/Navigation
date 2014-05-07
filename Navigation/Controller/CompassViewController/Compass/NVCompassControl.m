@@ -8,10 +8,10 @@
 
 #import "NVCompassControl.h"
 #import "NVCompassImage.h"
-#import "NVMath.h"
 
 #import "IDPPropertyMacros.h"
 #import "CGGeometry+IDPExtensions.h"
+#import "CGGeometry+NVExtensions.h"
 
 static const CGFloat kNVAnimationDuration   = 0.5;
 static const CGSize  kNVShadowSize          = {10, 10};

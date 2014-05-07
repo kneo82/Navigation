@@ -15,4 +15,7 @@
 @interface NVLocationContext : IDPModel
 @property (nonatomic, retain)   NVUser *user;
 
+- (void)startUpdatingLocation;
+- (void)stopUpdatingLocation;
+
 @end

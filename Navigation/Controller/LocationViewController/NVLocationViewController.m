@@ -11,6 +11,9 @@
 #import "NVLocationViewController.h"
 #import "NVLocationView.h"
 #import "NVUser.h"
+#import "IDPModelObserver.h"
+#import "NVLocationContext.h"
+#import "IDPPropertyMacros.h"
 
 #import "UIViewController+IDPExtensions.h"
 #import "NSObject+IDPExtensions.h"
@@ -21,11 +24,9 @@ static NSString * const kNVErrorNotFindeLocation = @"Could not find location: %@
 
 static const CLLocationDistance kNVDistanceForFilter = 100;
 
-@interface NVLocationViewController ()
+@interface NVLocationViewController () <IDPModelObserver>
 @property (nonatomic, readonly) NVLocationView      *locationView;
-@property (nonatomic, retain)   CLLocationManager   *locationManager;
-
-- (void)setupLocationManager;
+@property (nonatomic, retain)   NVLocationContext   *locationContext;
 
 @end
 
@@ -37,7 +38,7 @@ static const CLLocationDistance kNVDistanceForFilter = 100;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.locationManager = nil;
+    self.locationContext = nil;
     self.user = nil;
     
     [super dealloc];
@@ -56,68 +57,43 @@ static const CLLocationDistance kNVDistanceForFilter = 100;
 #pragma mark -
 #pragma mark View Lifecycle
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setupLocationManager];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"viewDidAppear");
+    [super viewDidAppear:animated];
+    
+    if (!self.locationContext) {
+        self.locationContext = [NVLocationContext object];
+    }
+    
+    NVLocationContext *context = self.locationContext;
+    context.user = self.user;
+    
+    [context startUpdatingLocation];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    NSLog(@"viewDidDisappear");
+    [self.locationContext startUpdatingLocation];
+    
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark -
 #pragma mark Accessors
 
-IDPViewControllerViewOfClassGetterSynthesize(NVLocationView, locationView)
+IDPViewControllerViewOfClassGetterSynthesize(NVLocationView, locationView);
 
-#pragma mark -
-#pragma mark CLLocationManagerDelegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation *location = [locations lastObject];
-    CLLocationCoordinate2D coordinate = location.coordinate;
-    self.user.coordinate = coordinate;
-    
-    NVLocationView *locationView = self.locationView;
-    CLGeocoder *coder = [CLGeocoder object];
-    
-    locationView.coordinate = coordinate;
-    
-    [coder reverseGeocodeLocation:location
-                completionHandler:^(NSArray *placemarks, NSError *error)
-    {
-        if (!error) {
-            locationView.placemark = [placemarks firstObject];
-        } else {
-            locationView.error.text = [NSString stringWithFormat:kNVError, error];
-        }
-    }];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error
-{
-    NSString *errorString = [NSString stringWithFormat:kNVErrorNotFindeLocation, error];
-    self.locationView.error.text = errorString;
+- (void)setLocationContext:(NVLocationContext *)locationContext {
+    IDPNonatomicRetainPropertySynthesizeWithObserver(_locationContext, locationContext);
 }
 
 #pragma mark -
-#pragma mark Private
+#pragma mark IDPModelObserver
 
-- (void)setupLocationManager {
-    self.locationManager = [CLLocationManager object];
-    CLLocationManager *locationManager = self.locationManager;
-    
-    [locationManager setDelegate:self];
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    locationManager.distanceFilter = kNVDistanceForFilter;
-    
-    [locationManager startUpdatingLocation];
+- (void)modelDidLoad:(id)model {
+    self.locationView.user = self.user;
+}
+
+- (void)modelDidFailToLoad:(id)model {
+    self.locationView.user = self.user;
 }
 
 @end

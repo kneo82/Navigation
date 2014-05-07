@@ -8,10 +8,10 @@
 
 #import "NVCompassImage.h"
 
-#import "NVMath.h"
 #import "IDPPropertyMacros.h"
 
 #import "CGGeometry+IDPExtensions.h"
+#import "CGGeometry+NVExtensions.h"
 #import "NSObject+IDPExtensions.h"
 #import <QuartzCore/QuartzCore.h>
 

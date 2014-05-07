@@ -11,23 +11,28 @@
 #import "NVCompassViewController.h"
 #import "NVCompassView.h"
 #import "NVCompassControl.h"
+#import "NVHeadingContext.h"
+#import "IDPPropertyMacros.h"
+#import "IDPModelObserver.h"
+#import "NVUser.h"
 
 #import "CGGeometry+IDPExtensions.h"
 #import "NSObject+IDPExtensions.h"
 #import "UIViewController+IDPExtensions.h"
+#import "UIAlertView+IDPExtensions.h"
 
 static NSString * const kNVTitle            = @"Compass";
+static NSString * const kNVErrorMessage     = @"Failed to retrieve user's heading";
 
 static const CGFloat    kNVTimeFullRotation = 2;
 static const CGFloat    kNVMaxTimeRotate    = 5;
 
-@interface NVCompassViewController ()
-@property (nonatomic, retain)   CLLocationManager   *locationManager;
+@interface NVCompassViewController () <IDPModelObserver>
+@property (nonatomic, retain)   NVHeadingContext    *headingContext;
 @property (nonatomic, readonly) NVCompassView       *compassView;
 
 @property (nonatomic, retain)   NVRotationGestureRecognizer *gestureRecognizer;
 
-- (void)setupLocationManager;
 - (void)setupGestureRecognizer;
 
 @end
@@ -40,7 +45,7 @@ static const CGFloat    kNVMaxTimeRotate    = 5;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.locationManager = nil;
+    self.headingContext = nil;
     self.gestureRecognizer = nil;
     self.user = nil;
     
@@ -63,14 +68,33 @@ static const CGFloat    kNVMaxTimeRotate    = 5;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupLocationManager];
     [self setupGestureRecognizer];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (!self.headingContext) {
+        self.headingContext = [NVHeadingContext object];
+    }
+    
+    [self.headingContext startUpdatingHeading];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [self.headingContext startUpdatingHeading];
+    
+    [super viewDidDisappear:animated];
 }
 
 #pragma mark -
 #pragma mark Accessors
 
 IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
+
+- (void)setHeadingContext:(NVHeadingContext *)headingContext {
+    IDPNonatomicRetainPropertySynthesizeWithObserver(_headingContext, headingContext);
+}
 
 #pragma mark -
 #pragma mark Interface Handling
@@ -88,32 +112,17 @@ IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
         [self.compassView.compass rotateViewWithDuration:duration byAngle:-angle];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             sleep(duration);
-            [self.locationManager startUpdatingHeading];
+            [self.headingContext startUpdatingHeading];
         });
 	} else {
+        [self.headingContext stopUpdatingHeading];
+        
 		self.compassView.compass.angle = angle;
 	}
 }
 
 #pragma mark -
-#pragma mark CLLocationManagerDelegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
-    CGFloat mHeading = newHeading.magneticHeading;
-    self.compassView.compass.angle = mHeading;
-}
-
-#pragma mark -
 #pragma mark Private
-
-- (void)setupLocationManager {
-    self.locationManager = [CLLocationManager object];
-    CLLocationManager *locationManager = self.locationManager;
-    
-    [locationManager setDelegate:self];
-    
-    [locationManager startUpdatingHeading];
-}
 
 - (void)setupGestureRecognizer {
     NVCompassView *compassView = self.compassView;
@@ -129,6 +138,13 @@ IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
     [self.gestureRecognizer addTarget:self action:@selector(handleSwirlGesture:)];
     
     [compassView.compass addGestureRecognizer:self.gestureRecognizer];
+}
+
+#pragma mark -
+#pragma mark IDPModelObserver
+
+- (void)modelDidLoad:(id)model {
+    self.compassView.compass.angle = self.user.heading;
 }
 
 @end

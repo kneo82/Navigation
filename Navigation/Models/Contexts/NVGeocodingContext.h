@@ -15,4 +15,6 @@
 @interface NVGeocodingContext : IDPModel
 @property (nonatomic, retain)   NVUser *user;
 
+- (void)processingGeocoding;
+
 @end

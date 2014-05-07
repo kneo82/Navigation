@@ -11,11 +11,8 @@
 
 @interface NVUser : NSObject
 @property (nonatomic, assign)	CLLocationCoordinate2D	coordinate;
-@property (nonatomic, copy)		NSString				*country;
-@property (nonatomic, copy)		NSString				*region;
-@property (nonatomic, copy)		NSString				*city;
-@property (nonatomic, copy)		NSString				*street;
-@property (nonatomic, copy)		NSString				*postalCode;
+@property (nonatomic, copy)		NSString				*address;
+@property (nonatomic, copy)     NSString                *error;
 
 @property (nonatomic, readonly)	NSArray					*annotations;
 @property (nonatomic, assign)	CLLocationDirection		heading;

@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class NVUser;
+
 @interface NVLocationView : UIView
 @property (nonatomic, retain)   IBOutlet UILabel        *latitude;
 @property (nonatomic, retain)   IBOutlet UILabel        *longitude;
 @property (nonatomic, retain)   IBOutlet UILabel        *address;
 @property (nonatomic, retain)   IBOutlet UILabel        *error;
-@property (nonatomic, retain)   CLPlacemark             *placemark;
-@property (nonatomic, assign)   CLLocationCoordinate2D  coordinate;
+@property (nonatomic, retain)   NVUser                  *user;
 
 @end

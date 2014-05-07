@@ -7,9 +7,9 @@
 //
 
 #import "NVRotationGestureRecognizer.h"
-#import "NVMath.h"
 
 #import "CGGeometry+IDPExtensions.h"
+#import "CGGeometry+NVExtensions.h"
 
 @interface NVRotationGestureRecognizer ()
 @property (nonatomic, assign)   CGPoint pointOfCentre;

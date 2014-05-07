@@ -68,6 +68,18 @@ static NSString * const kLocationError = @"Unable to determine the  location";
     [map setRegion:region animated:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.mapView.map.showsUserLocation = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    self.mapView.map.showsUserLocation = NO;
+    
+    [super viewDidDisappear:animated];
+}
+
 #pragma mark -
 #pragma mark Accessors
 

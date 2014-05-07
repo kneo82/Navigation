@@ -8,6 +8,7 @@
 
 #import "NVUser.h"
 #import "NVMapAnnotation.h"
+#import "IDPPropertyMacros.h"
 
 static const CLLocationDegrees kNVNorth   = 0.0;
 static const CLLocationDegrees kNVSouth   = 180.0;
@@ -29,12 +30,9 @@ static const CLLocationDegrees kNVEast    = 90.0;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-	self.country = nil;
-	self.region = nil;
-	self.city = nil;
-	self.street = nil;
-	self.postalCode = nil;
-	
+	self.address = nil;
+	self.error = nil;
+    
 	self.mutableAnnotations = nil;
 	
 	[super dealloc];
@@ -51,6 +49,12 @@ static const CLLocationDegrees kNVEast    = 90.0;
 
 #pragma mark -
 #pragma mark Accessors
+
+- (void)setAddress:(NSString *)address {
+    IDPNonatomicCopyPropertySynthesize(_address, address);
+
+    self.error = nil;
+}
 
 - (NSArray *)annotations {
 	return [[self.mutableAnnotations copy] autorelease];

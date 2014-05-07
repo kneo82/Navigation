@@ -7,7 +7,7 @@
 //
 
 #import "NVMapAnnotation.h"
-#import "NVMath.h"
+#import "CLLocation+NVExtensions.h"
 
 @interface NVMapAnnotation ()
 
