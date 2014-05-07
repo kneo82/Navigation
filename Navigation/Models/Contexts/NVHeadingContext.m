@@ -16,7 +16,7 @@
 @interface NVHeadingContext () <CLLocationManagerDelegate>
 @property (nonatomic, retain)	CLLocationManager		*locationManager;
 
-- (void)setupHeading;
+- (void)createHeadingObject;
 
 @end
 
@@ -53,7 +53,7 @@
 }
 
 - (void)startUpdatingHeading {
-    [self setupHeading];
+    [self createHeadingObject];
 }
 
 - (void)stopUpdatingHeading {
@@ -63,7 +63,7 @@
 #pragma mark -
 #pragma mark Private
 
-- (void)setupHeading {
+- (void)createHeadingObject {
 	if (![CLLocationManager headingAvailable]) {
 		[self failLoading];
 		return;

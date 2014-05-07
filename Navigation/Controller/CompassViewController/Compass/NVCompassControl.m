@@ -24,7 +24,7 @@ static NSString * const kNVAnimationKey     = @"rotationAnimation";
 @property (nonatomic, retain)	NVCompassImage  *compass;
 @property (nonatomic, retain)	UIView          *shadow;
 
-- (void)setup;
+- (void)create;
 
 @end
 
@@ -64,7 +64,7 @@ static NSString * const kNVAnimationKey     = @"rotationAnimation";
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self setup];
+    [self create];
 }
 
 #pragma mark -
@@ -100,7 +100,7 @@ static NSString * const kNVAnimationKey     = @"rotationAnimation";
 #pragma mark -
 #pragma mark Private
 
-- (void)setup {
+- (void)create {
     NVCompassImage *compass = [[[NVCompassImage alloc] initWithFrame:self.bounds] autorelease];
     self.compass = compass;
     

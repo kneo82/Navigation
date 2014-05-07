@@ -9,6 +9,7 @@
 #import "NVMapAnnotation.h"
 #import "CLLocation+NVExtensions.h"
 
+static NSString * const kNVDistance = @"Distance %.2f m";
 @interface NVMapAnnotation ()
 
 @end
@@ -35,7 +36,7 @@
     if (self) {
         self.coordinate = newCoordinateAtDistance(coordinate, distance, degrees);
         
-        self.title = [NSString stringWithFormat:@"Distance %.2f m", distance];
+        self.title = [NSString stringWithFormat:kNVDistance, distance];
     }
     
     return self;

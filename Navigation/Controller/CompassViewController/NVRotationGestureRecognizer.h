@@ -12,7 +12,11 @@
 @interface NVRotationGestureRecognizer : UIGestureRecognizer
 @property (nonatomic, assign)   CGFloat cumulatedAngle;
 
-- (id)initWithPointOfCentre:(CGPoint)pointOfCentre
++ (id)gestureWithCentre:(CGPoint)centre
+            innerRadius:(CGFloat)innerRadius
+            outerRadius:(CGFloat)outerRadius;
+
+- (id)initWithCentre:(CGPoint)centre
                 innerRadius:(CGFloat)innerRadius
                 outerRadius:(CGFloat)outerRadius;
 

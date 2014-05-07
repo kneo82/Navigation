@@ -12,7 +12,7 @@
 #import "CGGeometry+NVExtensions.h"
 
 @interface NVRotationGestureRecognizer ()
-@property (nonatomic, assign)   CGPoint pointOfCentre;
+@property (nonatomic, assign)   CGPoint centre;
 @property (nonatomic, assign)   CGFloat innerRadius;
 @property (nonatomic, assign)   CGFloat outerRadius;
 
@@ -21,13 +21,23 @@
 @implementation NVRotationGestureRecognizer
 
 #pragma mark -
+#pragma mark Class Methods
+
++ (id)gestureWithCentre:(CGPoint)centre
+            innerRadius:(CGFloat)innerRadius
+            outerRadius:(CGFloat)outerRadius
+{
+    return [[[self alloc] initWithCentre:centre innerRadius:innerRadius outerRadius:outerRadius] autorelease];
+}
+
+#pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
     [super dealloc];
 }
 
-- (id)initWithPointOfCentre:(CGPoint)pointOfCentre
+- (id)initWithCentre:(CGPoint)centre
                 innerRadius:(CGFloat)innerRadius
                 outerRadius:(CGFloat)outerRadius
 {
@@ -36,7 +46,7 @@
     if (self) {
         self.innerRadius = innerRadius;
         self.outerRadius = outerRadius;
-        self.pointOfCentre = pointOfCentre;
+        self.centre = centre;
     }
     
     return  self;
@@ -71,9 +81,9 @@
     
     CGPoint nowPoint  = [[touches anyObject] locationInView:self.view];
     CGPoint prevPoint = [[touches anyObject] previousLocationInView:self.view];
-    CGPoint pointOfCentre = self.pointOfCentre;
+    CGPoint pointOfCentre = self.centre;
     
-    CGFloat distance = CGDistance(self.pointOfCentre, nowPoint);
+    CGFloat distance = CGDistance(self.centre, nowPoint);
     if (self.innerRadius <= distance && distance <= self.outerRadius) {
         CGFloat angle = angleBetweenLinesInDegrees(pointOfCentre, prevPoint, pointOfCentre, nowPoint);
         

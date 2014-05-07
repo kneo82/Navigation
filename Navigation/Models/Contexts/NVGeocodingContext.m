@@ -22,7 +22,7 @@ static NSString * const kNVError = @"ERROR : %@";
 @property (nonatomic, retain)	CLGeocoder	*geocoder;
 
 - (void)geocodeDidFinishedWithPlacemark:(CLPlacemark *)placemark error:(NSError *)error;
-- (void)setupGeocoding;
+- (void)createGeocodingObject;
 
 @end
 
@@ -60,13 +60,13 @@ static NSString * const kNVError = @"ERROR : %@";
 #pragma mark Public
 
 - (void)processingGeocoding {
-    [self setupGeocoding];
+    [self createGeocodingObject];
 }
 
 #pragma mark -
 #pragma mark Private
 
-- (void)setupGeocoding {
+- (void)createGeocodingObject {
 	CLLocationCoordinate2D coordinate = self.user.coordinate;
 	CLLocation *location = [[[CLLocation alloc] initWithLatitude:coordinate.latitude
 													   longitude:coordinate.longitude] autorelease];

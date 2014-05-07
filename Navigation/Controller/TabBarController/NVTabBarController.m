@@ -18,7 +18,7 @@
 
 @interface NVTabBarController ()
 
-- (void)setupControllers;
+- (void)createControllers;
 
 @end
 
@@ -30,7 +30,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self setupControllers];
+        [self createControllers];
     }
     
     return self;
@@ -39,7 +39,7 @@
 #pragma mark -
 #pragma mark Private
 
-- (void)setupControllers {
+- (void)createControllers {
     NVMapViewController *mapController = nil;
     mapController = [NVMapViewController viewControllerWithDefaultNib];
     

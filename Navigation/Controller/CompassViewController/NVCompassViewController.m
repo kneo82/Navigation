@@ -33,7 +33,7 @@ static const CGFloat    kNVMaxTimeRotate    = 5;
 
 @property (nonatomic, retain)   NVRotationGestureRecognizer *gestureRecognizer;
 
-- (void)setupGestureRecognizer;
+- (void)createGestureRecognizer;
 
 @end
 
@@ -68,7 +68,7 @@ static const CGFloat    kNVMaxTimeRotate    = 5;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupGestureRecognizer];
+    [self createGestureRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -124,16 +124,15 @@ IDPViewControllerViewOfClassGetterSynthesize(NVCompassView, compassView)
 #pragma mark -
 #pragma mark Private
 
-- (void)setupGestureRecognizer {
+- (void)createGestureRecognizer {
     NVCompassView *compassView = self.compassView;
     CGRect rect = compassView.compass.bounds;
-    CGPoint pointOfCentre = CGRectGetCenter(rect);
+    CGPoint centre = CGRectGetCenter(rect);
     CGFloat outRadius = rect.size.width / 2;
     
-    self.gestureRecognizer = [[[NVRotationGestureRecognizer alloc] initWithPointOfCentre:pointOfCentre
-                                                                             innerRadius:outRadius/5
-                                                                             outerRadius:outRadius]
-                                                                                autorelease];
+    self.gestureRecognizer = [NVRotationGestureRecognizer gestureWithCentre:centre
+                                                                innerRadius:outRadius/5
+                                                                outerRadius:outRadius];
     
     [self.gestureRecognizer addTarget:self action:@selector(handleSwirlGesture:)];
     

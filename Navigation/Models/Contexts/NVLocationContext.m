@@ -25,7 +25,7 @@ static const CLLocationDistance kNVDistanceForFilter = 100;
 @property (nonatomic, retain)	CLLocationManager   *locationManager;
 @property (nonatomic, retain)	NVGeocodingContext  *geocodingContext;
 
-- (void)setupLocatiomManager;
+- (void)createLocatiomManager;
 
 @end
 
@@ -60,7 +60,7 @@ static const CLLocationDistance kNVDistanceForFilter = 100;
 #pragma mark Public
 
 - (void)startUpdatingLocation {
-    [self setupLocatiomManager];
+    [self createLocatiomManager];
 }
 
 - (void)stopUpdatingLocation {
@@ -78,7 +78,7 @@ static const CLLocationDistance kNVDistanceForFilter = 100;
 #pragma mark -
 #pragma mark Private
 
-- (void)setupLocatiomManager {
+- (void)createLocatiomManager {
     if (![CLLocationManager locationServicesEnabled]) {
         self.user.error = kNVErrorServicesUnavailable;
 		[self failLoading];
